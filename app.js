@@ -10,10 +10,13 @@ app.use(express.static('images'));
 //sets the view engine to pug!
 app.set('view engine', 'pug');
 
+//about page
+app.get('/about', (req, res) => res.render('about') );
+
 //home page render
-app.get('/', (req, res) => {
-    res.render('index');
-});
+app.get('/', (req, res) => res.render('index') );
+
+
 
 //server
 app.listen(8080);

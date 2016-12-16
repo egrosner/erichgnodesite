@@ -8,20 +8,23 @@ html(lang="en")
   body
     .ui.pointing.menu
       .header.item erichgrosner.com
-      a.active.item home
-      a.item about
+      a.active.item(href='/') home
+      a.item(href='/about') about
       .right.menu
         a.item login
-    .ui.items
-        .item
-            .image
-                img(src='/me.jpg')
-            .content
-                a.header about me
-                .meta
-                    span cyclist; coffee consumer; developer;
-                .description
-                    p this is my playground on the internet.
-                .extra
-    block content
+    .ui.grid.container
+      .six.wide.column
+        .ui.items
+            .item
+                .image
+                    img(src='/me.jpg')
+                .content
+                    a.header about me
+                    .meta
+                        span cyclist; coffee consumer; developer;
+                    .description
+                        p this is my playground on the internet.
+                    .extra
+      .ten.wide.column
+        block content
     p (c) erich grosner
