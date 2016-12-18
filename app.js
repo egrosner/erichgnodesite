@@ -19,7 +19,7 @@ sequelize.sync();
 
 /*
 BlogPost.upsert({
-    title: 'second post!'
+    title: 'first post'
 });
 */
 
@@ -37,8 +37,8 @@ app.get('/about', (req, res) => {
 
 //home page render
 app.get('/', (req, res) => {
-    Model.findAll().then(posts => {
-        res.render('index', posts);
+    BlogPost.findAll().then(posts => {
+        res.render('index', posts[0].dataValues);
     });
 });
 
