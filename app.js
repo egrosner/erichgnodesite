@@ -4,7 +4,7 @@ const Sequelize = require('sequelize');
 
 const app = express();
 
-var sequelize = new Sequelize(process.env.JAWDB_URL);
+var sequelize = new Sequelize(process.env.JAWSDB_URL);
 
 var BlogPost = sequelize.define('blogpost', {
   id: {
