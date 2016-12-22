@@ -112,7 +112,7 @@ app.get('/', (req, res) => {
             res.render('index');
         }
         else {
-            res.render('index', posts[0].dataValues);
+            res.render('index', { posts: posts });
         }
     });
 });
