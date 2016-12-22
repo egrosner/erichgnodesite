@@ -56,6 +56,7 @@ BlogPost.belongsTo(User);
 
 sequelize.sync();
 
+/*
 User.create({
     id: 'a0ed4146-924f-47cf-be6c-9140e9c734e9',
     name: 'erich',
@@ -70,7 +71,7 @@ User.create({
         post.setUser(erichUser);
     });
 });
-
+*/
 
 
 //server up the semantic css
@@ -80,6 +81,25 @@ app.use(express.static('images'));
 //sets the view engine to pug!
 app.set('view engine', 'pug');
 
+app.get('/data/init', (req, res) => {
+    let createdErich;
+    User.create({
+        id: 'a0ed4146-924f-47cf-be6c-9140e9c734e9',
+        name: 'erich',
+        picture: 'me.jpg'
+    }).then((erichUser) => {
+        createdErich = erichUser;
+        return BlogPost.create({
+            id: '2971b435-4dd8-455c-864f-e53a68c454e7',
+            title: 'first post',
+            body: 'this is the content of the first post',
+            postDate: new Date()
+        });
+    }).then((post) => {
+        post.setUser(createdErich);
+    });
+})
+
 //about page
 app.get('/about', (req, res) => {
     res.render(req.route.path.substr(1, req.route.path.length));
@@ -87,8 +107,13 @@ app.get('/about', (req, res) => {
 
 //home page render
 app.get('/', (req, res) => {
-    BlogPost.findAll().then(posts => {
-        res.render('index', posts[0].dataValues);
+    BlogPost.findAll({include: User}).then(posts => {
+        if(posts.length == 0) {
+            res.render('index');
+        }
+        else {
+            res.render('index', posts[0].dataValues);
+        }
     });
 });
 

@@ -11,5 +11,5 @@ block content
           p #{body}
     .extra.content
       .right.floated.author
-        img.ui.avatar.image(src="/me.jpg") 
-        div erich
+        img.ui.avatar.image(src=`/${user.picture}`) 
+        div #{user.name}
